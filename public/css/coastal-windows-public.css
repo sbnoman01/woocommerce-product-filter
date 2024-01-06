@@ -1,0 +1,73 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+ .wcproduct-nav-icon{
+    position: absolute;
+    top: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 999;
+	transform: translate(-50%, -50%);
+}
+.wcproduct-inner-content h3 {
+    font-size: 22px;
+	line-height:1.2;
+    font-family: "Space Grotesk", Sans-serif;
+}
+/* .wcproduct-nav-icon svg{
+	width: 66px;
+    height: 66px;
+} */
+
+.wcproduct-next{
+    right: -60px;
+    left: auto;
+}
+.wcproduct-prev{
+    left: 0;
+    right: auto;
+}
+.wcproduct-thumb img {
+    max-height: 250px;
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+.wpn-product-slider-wrpp .swiper .swiper-slide {
+    background: #edf7fc;
+    padding: 24px;
+    height: auto;
+	justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+	gap: 20px
+}
+a.wpnreq-button {
+	display: inline-block;
+	font-weight: 700;
+    padding: 15px 30px;
+    background: #144c7b;
+	color: #fff;
+    border-radius: 30px;
+    margin-bottom: 15px;
+}
+
+
+
+/* filter css */
+
+.filter-rows{
+    display: flex;
+    flex-wrap: wrap;
+}
+.filter-col-3{
+    flex: 0 0 auto;
+    width: 25%;
+}
+.filter-col-9{
+    flex: 0 0 auto;
+    width: 75%;
+}
