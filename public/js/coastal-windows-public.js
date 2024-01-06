@@ -87,7 +87,8 @@
 					nonce: fil_ajax.nonce,
 					perforance: getSelectedPerform,
 					styles: getSelectedStyles,
-					frame: getSelectedFrame
+					frame: getSelectedFrame,
+					type: $('#product_filter').data("product-type")
 				},
 				beforeSend: function () {
 					$('.filter-loader').show();
@@ -105,4 +106,5 @@
 		});
 
 	});
+
 })( jQuery );

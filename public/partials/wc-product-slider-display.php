@@ -1,6 +1,6 @@
 <?php
 
-function wc_proudct_slider_display(){
+function wc_proudct_slider_display($vars){
     ob_start();
     
     ?>
@@ -24,6 +24,14 @@ function wc_proudct_slider_display(){
                 $args = array(
                     'post_type'      => 'product', // Specify the post type as 'product'
                     'posts_per_page' => -1,        // Retrieve all products (use -1 for all, or a specific number)
+                    'post_status' => 'publish',
+                    'tax_query'     => [
+                        [
+                            'taxonomy' => 'item-type',
+                            'field'     => 'slug',
+                            'terms' => $vars['type']
+                        ]
+                    ]
                 );
 
                 $woocommerce_query = new WP_Query($args);

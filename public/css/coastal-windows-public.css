@@ -16,6 +16,7 @@
     font-size: 22px;
 	line-height:1.2;
     font-family: "Space Grotesk", Sans-serif;
+    margin-bottom: 0;
 }
 /* .wcproduct-nav-icon svg{
 	width: 66px;
@@ -74,4 +75,66 @@ a.wpnreq-button {
 .filter-col-9{
     flex: 0 0 auto;
     width: 75%;
+}
+
+.filter-boxes {
+    padding-right: 40px;
+}
+.filter-boxes .filter-item {
+    padding: 24px 0;
+    border-top: 1px dashed #054c7da3;
+}
+.filter-fieds .filter-fieds-single {
+    padding-bottom: 15px;
+}
+.filter-fieds .filter-fieds-single input[type="checkbox"] {
+    /* Double-sized Checkboxes */
+    -ms-transform: scale(1.55); /* IE */
+    -moz-transform: scale(1.55); /* FF */
+    -webkit-transform: scale(1.55); /* Safari and Chrome */
+    -o-transform: scale(1.55); /* Opera */
+    transform: scale(1.55);
+    padding: 10px;
+    margin-right: 10px;
+}
+.filter-boxes .filter-item .filter-heading h4 {
+    margin-bottom: 20px;
+    font-weight: 500;
+    font-size: 20px;
+}
+.filter-single-item {
+    background: #edf7fc;
+    margin: 10px;
+    padding: 15px 15px 5px;
+    height: 100%;
+}
+.filter-rows.filtered_data .filter-col-4 {
+    margin-bottom: 20px;
+}
+
+.filter-single-item .wcproduct-inner-content{
+    margin-top: 15px;
+}
+.filter-single-item .wcproduct-inner-content a {
+    text-decoration: none;
+}
+
+@media only screen and ( max-width: 991px){
+    .filter-col-4{
+        width: 50%;
+    }
+}
+@media only screen and ( max-width: 768px){
+    .filter-col-4{
+        /* width: 100%; */
+    }
+    .filter-col-9{
+        width: 100%;
+    }
+    .filter-col-3{
+        width: 100%;
+    }
+    .wcproduct-inner-content h3{
+        font-size: 16px;
+    }
 }
