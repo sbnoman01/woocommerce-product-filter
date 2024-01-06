@@ -174,7 +174,8 @@ class Coastal_Windows {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		
-		
+		add_action("wp_ajax_wc_product_filter", [ $this, "wc_product_filter" ]);
+		add_action("wp_ajax_nopriv_wc_product_filter", [$this, "wc_product_filter"]);
 	}
 
 	/**
@@ -228,5 +229,83 @@ class Coastal_Windows {
 		require_once plugin_dir_path( __FILE__ ) . '/class-wpnoman-shortcode.php';
 	}
 	
+	/****
+	 * 
+	 * Filer ajax requests handlers
+	 */
+	public function wc_product_filter(){
 
+		// verify nonce
+		$nonce = $_REQUEST['nonce'];
+		if( wp_verify_nonce( $nonce, 'product-filter' ) != true ){
+			return;
+		}
+
+		
+		$paged = 1; //sanitize_text_field($_REQUEST['page']);
+
+		$product_post_args = [
+			'post_type' => 'product',
+			'post_status' => 'publish',
+			'posts_per_page' => 5,
+			'tax_query' => ['relation' => 'AND'],
+			'paged'=> $paged
+		];
+
+		$get_perforance_term = (sanitize_text_field($_REQUEST['perforance'])) ? explode(',', sanitize_text_field($_REQUEST['perforance'])) : null;
+		if( $get_perforance_term != null && count($get_perforance_term) > 0 ){
+			$product_post_args['tax_query'][] = [
+				'taxonomy' => 'performance',
+				'field'     => 'slug',
+				'terms' => $get_perforance_term 
+			];
+		}
+
+		$get_styles_term = (sanitize_text_field($_REQUEST['styles'])) ? explode(',', sanitize_text_field($_REQUEST['styles'])) : null;
+		if( $get_styles_term != null && count($get_styles_term) > 0 ){
+			$product_post_args['tax_query'][] = [
+				'taxonomy' => 'styles',
+				'field'     => 'slug',
+				'terms' => $get_styles_term 
+			];
+		}
+		$get_frame_term = (sanitize_text_field($_REQUEST['frame'])) ? explode(',', sanitize_text_field($_REQUEST['frame'])) : null;
+		if( $get_frame_term != null && count($get_frame_term) > 0 ){
+			$product_post_args['tax_query'][] = [
+				'taxonomy' => 'frames',
+				'field'     => 'slug',
+				'terms' => $get_frame_term 
+			];
+		}
+
+		$product_query = new WP_Query($product_post_args);
+		
+		if( $product_query->have_posts()){
+			while($product_query->have_posts()){
+				$product_query->the_post();
+				ob_start();
+					?>
+						<div class="filter-col-4">
+							<div class="wcproduct-thumb">
+								<a href="<?php echo esc_url( get_the_permalink() ) ?>">
+									<?php echo get_the_post_thumbnail(); ?>
+								</a>
+							</div>
+							<div class="wcproduct-inner-content">
+								<a href="<?php echo esc_url( get_the_permalink() ) ?>">
+									<h3>
+										<?php the_title(); ?>
+									</h3>
+								</a>
+							</div>
+						</div>
+					<?php
+				$_post[] = ob_get_clean();
+			}
+			wp_reset_postdata();
+		}
+		wp_send_json( ['max_num_page' => $product_query->max_num_pages, 'posts' => $_post, 'query'=>  $product_post_args] );
+
+		die();
+	}
 }

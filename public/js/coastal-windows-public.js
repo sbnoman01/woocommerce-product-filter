@@ -41,7 +41,68 @@
 		};
 		
 
+	/***
+	 ***** 
+	 * Product filer ajax call 
+	 */
+
+	// $('.tax_perforance').on('change', function () {
+	// 	$('.tax_perforance').not(this).prop('checked', false);
+	// });
+
+	// $('.tax_cat').on('change', function () {
+	// 	$('.tax_cat').not(this).prop('checked', false);
+	// });
+
+	// Get the Selected Topic
+	function getSelectedPerform() {
+		return $('.tax_perforance:checked').val();
+		// return topic_name;
+	}
+
+	// Get the Selected Cat
+	function getSelectedStyles() {
+		let styles_name = [];
+			$('.tax_styles:checked').each(function () {
+				styles_name.push($(this).val());
+		});
+		return styles_name;
+	}
+
+	// Get the Selected Cat
+		function getSelectedFrame() {
+			let tax_frames = [];
+			$('.tax_frames:checked').each(function () {
+				tax_frames.push($(this).val());
+		});
+			return tax_frames;
+	}
+
+		$(document).on('change', '.filter_class', function (e) {
+			$.ajax({
+				type: "POST",
+				url: fil_ajax.url,
+				data: {
+					action: "wc_product_filter",
+					nonce: fil_ajax.nonce,
+					perforance: getSelectedPerform,
+					styles: getSelectedStyles,
+					frame: getSelectedFrame
+				},
+				beforeSend: function () {
+					$('.filter-loader').show();
+				},
+				success: function (res) {
+
+					var content_wrapper = $('.filtered_data');
+					if ($.trim(res.posts)) {
+						content_wrapper.html(res.posts);
+					}
+					console.log(res);
+
+				}
+			});
+		});
+
 	});
-				  
-	
 })( jQuery );

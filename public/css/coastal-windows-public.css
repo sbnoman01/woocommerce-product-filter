@@ -67,6 +67,10 @@ a.wpnreq-button {
     flex: 0 0 auto;
     width: 25%;
 }
+.filter-col-4 {
+    flex: 0 0 auto;
+    width: 33.333333333%;
+}
 .filter-col-9{
     flex: 0 0 auto;
     width: 75%;

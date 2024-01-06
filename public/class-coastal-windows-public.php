@@ -875,6 +875,11 @@ class Coastal_Windows_Public {
 
 		wp_enqueue_script( $this->plugin_name . 'swiper', plugin_dir_url( __FILE__ ) . 'js/swiper-bundle.min.js', array( 'jquery' ), time(), false );
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/coastal-windows-public.js', array( 'jquery' ), time(), false );
+		$filter_ajax_arg = [
+			'url' => admin_url('admin-ajax.php'),
+			'nonce' => wp_create_nonce('product-filter')
+		];
+		wp_localize_script( $this->plugin_name, 'fil_ajax', $filter_ajax_arg );
 
 	}
 
