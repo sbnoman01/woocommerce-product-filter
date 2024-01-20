@@ -198,6 +198,7 @@ class Coastal_Windows
 		$shortcode = new Class_ShortCode();
 		add_shortcode('wc-slider-by-noman', [$shortcode, 'wc_product_slider']);
 		add_shortcode('wc-product-filter-by-noman', [$shortcode, 'wc_product_filter']);
+		add_shortcode('wc-related-product-by-noman', [$shortcode, 'wc_related_product']);
 	}
 	/**
 	 * The name of the plugin used to uniquely identify it within the context of

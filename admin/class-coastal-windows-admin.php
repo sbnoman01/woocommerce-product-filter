@@ -109,6 +109,10 @@ class Coastal_Windows_Admin {
  		add_action('woocommerce_single_product_summary', [$this, 'add_to_cart_redirection'], 31);
 		add_filter ( 'woocommerce_is_sold_individually', [ $this, 'custom_remove_all_quantity_fields'], 10, 2 );
 		add_filter('woocommerce_product_single_add_to_cart_text', [ $this, 'custom_single_add_to_cart_text'] );
+		
+
+		remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
 	}
 	
 	public function add_to_cart_redirection(){
